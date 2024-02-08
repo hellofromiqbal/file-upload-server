@@ -13,7 +13,7 @@ cloudinaryV2.config({
   api_secret: API_SECRET 
 });
 
-export const uploadToCloudinary = async (path, folder = "public/articleImages") => {
+export const uploadToCloudinary = async (path, folder = "unireadImages") => {
   try {
     const data = await cloudinaryV2.uploader.upload(path, { folder });
     return { url: data.secure_url, publicId: data.public_id };

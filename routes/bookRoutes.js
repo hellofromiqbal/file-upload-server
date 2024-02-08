@@ -4,9 +4,6 @@ import { Book } from '../models/bookModel.js';
 import { uploadToCloudinary } from '../services/cloudinary.js';
 
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "./public/images");
-  },
   filename: (req, file, cb) => {
     cb(null, `${Date.now()}_${file.originalname}`);
   }
@@ -38,7 +35,7 @@ router.post("/new", upload.single('bookImage'), async (req, res) => {
     console.log(req.file);
 
     // Upload image to Cloudinary
-    const cloudinaryResult = await uploadToCloudinary(req.file.path, { folder: "public/images", use_filename: true });
+    const cloudinaryResult = await uploadToCloudinary(req.file.path, { folder: "unireadImages", use_filename: true });
 
     // Create new book with Cloudinary image URL
     const newBook = await Book.create({
